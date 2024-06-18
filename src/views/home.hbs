@@ -1,0 +1,29 @@
+<div class="divPrincipal">
+    <h1>Lista de Productos</h1>
+
+    <div style="display:grid;grid-template-columns: repeat(4, 1fr)">
+        {{#each listProducts}}
+        <div style="">
+            <div style="height: 400px; width:400px">
+                <div>
+                    Code: {{this.code}}
+                </div>
+                <div style="float: left; width: 300px; height: 300px;border: 2px solid #000000; background-color: rgb(0, 184, 144)">
+                    <h4 style="color: white; padding: 15px">{{this.title}}</h4>
+                    <ul style="background-color: rgb(0, 184, 144)">
+                        <li class="idProduct">ID: {{this._id}}</li>
+                        <li>Description: {{this.description}}</li>
+                        <li>Price: ${{this.price}}</li>
+                        <li>Category: {{this.category}}</li>
+                        <li>Status: {{this.status}}</li>
+                        <li>Stock: {{this.stock}}</li>
+                        <li>
+                            Image: <img src="{{this.thumbnail}}" alt="{{this.title}}">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

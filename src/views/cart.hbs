@@ -1,0 +1,19 @@
+<div style="display:grid; font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+    <div style="background-color: white; font-size:large">
+        <strong>El id del Cart:</strong> {{this._id}}
+
+    </div>
+    <div style="display:flex;background-color: white; margin:15px">
+        {{#each product}}
+        <div Style="width: 100%;height:100%;border: 2px solid #000000; background-color: #ffffffa1; margin:10px">
+            <h2>{{idP.title}}</h2>
+            <p>ID: {{idP._id}}</p>
+            <p>Descripción: {{idP.description}}</p>
+            <p>Precio: ${{idP.price}}</p>
+            <p>Código: {{idP.code}}</p>
+            <p>quantity: {{quantity}}</p>
+            
+        </div>
+        {{/each}}
+    </div>    
+</div>

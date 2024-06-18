@@ -1,0 +1,111 @@
+<div style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+   {{#if isAdmin}}
+    <div>
+        <h1 style="color: #333;">Formulario para agregar Productos</h1>
+        
+            <div style="background-color: #fff; padding: 5px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px; display: flex; justify-content: space-between; align-items: center; height: 50px">
+                <div>
+                    <p style="font-size: larger;"> Bienvenido:           {{user.first_name}}</p>
+                </div>
+                <form action="/api/sessions/logout" method="POST">
+                    <button type="submit" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;">Cerrar Sesión</button>
+                </form>
+            </div>
+            <div style="display:grid">
+                <form style="background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;"> 
+                    <div style="padding: 5px;">
+                        <label for="title" style="font-weight: bold; margin: 5px">Nombre:</label>
+                        <input type="text" id="title" name="title" placeholder="ingrese el Nombre de Producto" style="min-width: 200px;" required>        
+                    </div>
+        
+                    <div style="padding: 5px;">
+                        <label for="description" style="font-weight: bold; margin: 5px">Description:</label>
+                        <textarea type="text" id="description" name="description" placeholder="ingrese la description del Producto" style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 3px;" required></textarea>
+                    </div>
+                    
+                    <div style="padding: 5px;">
+                        <label for="price" style="font-weight: bold;">Precio:</label>
+                        <input type="text" id="price" name="price" placeholder="ingrese el Precio" style="min-width: 200px" required>
+                    </div>
+        
+                    <div style="padding: 5px;">
+                        <label for="code" style="font-weight: bold;">Codigo:</label>  
+                        <input type="text" id="code" name="code" placeholder="ingrese el Codigo" style="min-width: 200px" required>
+                    </div>
+        
+                    <div style="padding: 5px;">
+                        <label for="status" style="font-weight: bold;">Elige el Status:</label>  
+                        <select id="status" name="status">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                        </select>
+                    </div>
+        
+                    <div style="padding: 5px;">
+                        <label for="category" style="font-weight: bold;">Ingrese la Categoria:</label>  
+                        <input type="text" id="category" name="category" placeholder="ingrese la category" style="min-width: 200px" required>
+                    </div>
+        
+        
+                    <div style="padding: 5px;"> 
+                        <label for="stock" style="font-weight: bold;">Ingrese el Stock:</label>  
+                        <input type="text" id="stock" name="stock" placeholder="ingrese el Stock" style="min-width: 200px" required>
+                    </div>
+        
+                    <div style="padding: 5px;">
+                        <input type="submit" value="Ingresar Producto" id="btn_add" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+                        <input type="reset" value="Limpiar" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)">
+                    </div>
+                </form>
+            </div>   
+    </div>
+
+
+
+    <form style="background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+        <div>
+            <label for="idp" style="font-weight: bold;">Id:</label>  
+            <input type="text" id="idp" name="idp" placeholder="ingrese el ID del producto a borrar" style="min-width: 220px" required>
+        </div>
+        <div>
+            <input type="submit" value="Eliminar el Producto" id="btn_delete" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+        </div>
+
+    </form>
+
+
+
+
+
+
+  
+    <div id="list-products" style="background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+        <div style="margin: 15px;">
+
+
+        </div>
+    </div>
+
+
+
+    <div id="list-message" style="background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+
+
+
+
+    </div>
+   {{else}}
+    <div>
+        <p>No eres admin</p>
+    </div>
+    {{/if}}
+
+
+
+
+
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

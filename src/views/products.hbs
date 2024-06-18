@@ -1,0 +1,93 @@
+<div>
+   {{#if isUser}}
+    <div>
+        <h1 style="color: #333;">Formulario para visualizar Productos</h1>
+            <div style="background-color: #fff; padding: 5px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px; display:flex; justify-content:space-between; align-items: center; height: 50px">
+                <div>
+                    <p style="font-size: larger;"> Bienvenido:   {{user.first_name}} {{user.last_name}}</p>
+                </div>
+                <form action="/api/carts/{{user.cartId}}" method="GET" style="padding-left: 680px">
+                    <button type="submit" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;">Carrito</button>
+                </form>
+                <form action="/api/users/profile" method="GET">
+                    <button type="submit" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;">Profile</button>
+                </form>
+                <form action="/api/sessions/logout" method="POST">
+                    <button type="submit" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;">Cerrar Sesión</button>
+                </form>
+            </div>
+            <div style="display:grid; font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0; padding: 0;">
+                <form action="/api/products/" method="GET" style="background-color: #fff; padding: 5px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px;">
+                    <div style="padding: 5px">
+                        <label for="limit">Límite:</label>
+                        <input type="number" id="limit" name="limit" min="1" max="100" value="10">
+                    </div>
+                    <div style="padding: 5px">
+                        <label for="query">Categoría:</label>
+                        <input type="checkbox" id="query" name="query" value="Ropa"> Ropa
+                        <input type="checkbox" id="query" name="query" value="Calzado"> Calzado
+                        <input type="checkbox"  id="query" name="query" value="Accesorios"> Accesorios
+                    </div>
+                    <div style="padding: 5px">
+                        <label for="sort">Ordenar por Precio:</label>
+                        <select id="sort" name="sort">
+                            <option value="asc">ascendente</option>
+                            <option value="dsc">descendente</option>
+                        </select>
+                    </div>
+                    <div style="padding: 5px">
+                        <label for="page">Página:</label>
+                        <input type="number" id="page" name="page" min="1" value="1">
+                    </div>
+                    <div style="padding: 5px">
+                        <button type="submit" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">Buscar</button>
+                    </div>
+                </form>
+    <div style="display:grid;grid-template-columns: repeat(4, 1fr);background-color: white">
+            {{#each payload}}
+            <div style="">
+                <div style="height: 300px; width:300px; background-color: #ffffffc9;">
+                    <div style="padding: 5px">
+                        Code: {{this.code}}
+                    </div>
+                    <div style="display: grid; float: left; width: 300px; height: 300px; border: 2px solid #000000; background-color: #ffffffc9">
+                        <h4 style="color: black; margin-left: 30px">{{this.title}}</h4>
+                        <ul style="background-color: #fff">
+                            <li id="idProduct">ID: {{this._id}}</li>
+                            <li>Description: {{this.description}}</li>
+                            <li>Price: ${{this.price}}</li>
+                            <li>Category: {{this.category}}</li>
+                            <li>Status: {{this.status}}</li>
+                            <li>Stock: {{this.stock}}</li>
+                        </ul>
+                        <input type="submit" value="Agregar" id="button_add_{{this._id}}" style="padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin: 15px">
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+        <div>
+            {{#if hasPrevPage}}
+            <a href={{this.prevLink}}>
+                << Anterior</a>
+                    {{/if}}
+                    &nbsp;
+                    {{this.page}}
+                    &nbsp;
+                    {{#if hasNextPage}}
+                    <a href={{this.nextLink}}>Siguiente >></a>
+                    {{/if}}
+        </div>
+    </div>
+    {{else}}
+    <div>
+        <p>No estas registrado</p>
+    </div>
+    {{/if}}
+
+
+
+
+</div>
+<script src="/socket.io/socket.io.js"></script> 
+<script src="/js/products.js"></script>
