@@ -28,7 +28,6 @@
 
 ![alt text](/img/image-1.png)
 
-
 > Modificar el sistema de login del usuario para poder trabajar con session o con jwt (a tu elección). 
 
 >✓ (Sólo para jwt) desarrollar una estrategia “current” para extraer la cookie que contiene el token para 
