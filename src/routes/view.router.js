@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
 
 
 router.get('/realtimeproducts', (req, res) => {
-
     res.render('realtimeproducts', {
         user: res.locals.user,
         isAdmin: res.locals.user && res.locals.user.rol === "admin",  

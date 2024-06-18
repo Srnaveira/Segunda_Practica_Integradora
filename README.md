@@ -1,28 +1,45 @@
-# Desafio_entregable_Login
+# Segunda Practica Integradora
 
-##Consigna:
+## Consigna:
 
->✓ Ajustar nuestro servidor principal para trabajar con un sistema de login.
+>Continuar sobre el proyecto que has trabajado para tu ecommerce y configurar los siguientes elementos
 
 >Aspectos a incluir
-
->✓ Con base en el login de nuestro entregable anterior, refactorizar para incluir los nuevos conceptos.
-
->✓ Se deberá contar con un hasheo de contraseña utilizando bcrypt
+>✓ Crear un modelo User el cual contará con los campos: 
+>
+>   - first_name:String,
+>
+>   - last_name:String,
+>
+>   - email:String (único)
+>
+>   - age:Number,
+>
+>   - password:String(Hash)
+>
+>   - cart:Id con referencia a Carts
+>
+>   - role:String(default:’user’)
+>
 
 ![alt text](/img/image.png)
 
->✓ Se deberá contar con una implementación de passport, tanto para register como para login.
- 
+>✓ Desarrollar las estrategias de Passport para que funcionen con este modelo de usuarios
+
 ![alt text](/img/image-1.png)
 
-![alt text](/img/image-2.png)
 
->✓ Implementar el método de autenticación de GitHub a la vista de login
+> Modificar el sistema de login del usuario para poder trabajar con session o con jwt (a tu elección). 
+
+>✓ (Sólo para jwt) desarrollar una estrategia “current” para extraer la cookie que contiene el token para 
+>obtener el usuario asociado a dicho token, en caso de tener el token, devolver al usuario asociado al token, 
+>caso contrario devolver un error de passport, utilizar un extractor de cookie.
+
+>✓ Agregar al router /api/sessions/ la ruta /current, la cual utilizará el modelo de sesión que estés utilizando,
+>para poder devolver en una respuesta el usuario actual
 
 ![alt text](/img/image-3.png)
 
 ![alt text](/img/image-4.png)
 
 ![alt text](/img/image-5.png)
-

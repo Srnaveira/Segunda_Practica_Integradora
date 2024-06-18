@@ -19,10 +19,6 @@ import productsRouter from './routes/products.router.js';
 import viewRoutes from './routes/view.router.js';
 import usersRoutes from './routes/users.router.js';
 import seccionsRoutes from './routes/sessions.router.js';
-import cartsModel from './models/carts.model.js';
-
-
-const PORT = 8080;
 
 const app = express()
 
@@ -41,8 +37,6 @@ app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-
 app.use(session({
         store: MongoStore.create({ mongoUrl: process.env.MONGO_URL }),
         secret: 'D3MUS1C4l1g3r4',
@@ -51,17 +45,14 @@ app.use(session({
         cookie: {
                 secure: false,
                 path: '/',
-                expires: new Date(Date.now() + (9000)), 
-                maxAge: 5000
+                expires: new Date(Date.now() + (25000)), 
+                maxAge: 25000
         }
 }));
-
-
 
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
-
 
 app.use((req, res, next) => {
         res.locals.user = req.session.user || null;
@@ -75,11 +66,9 @@ app.use('/api/users/', usersRoutes)
 app.use('/api/sessions/', seccionsRoutes)
 
 
-const httpServer = app.listen(PORT, () =>{
-    console.log(`Listening on PORT: ${PORT}`)
-
+const httpServer = app.listen(process.env.PORT, () =>{
+    console.log(`Listening on PORT: ${process.env.PORT}`)
 })
-
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() =>{ console.log("Conexion sucefull")})
@@ -88,11 +77,8 @@ mongoose.connect(process.env.MONGO_URL)
 
 const socketServer = new Server(httpServer);
 
-
-
 const pManager = new ProductManager();
 const cManager = new CartsManagment();
-
 
 socketServer.on('connection', socket =>{
     console.log("Nuevo cliente conectado");
@@ -123,11 +109,8 @@ socketServer.on('connection', socket =>{
             } catch (error) {
                     socket.emit('message_add', "Error al agregar el producto: " + error.message)
             }
+        })
     
-    })
-    
-
-
         socket.on('productDelete',  async (pid) =>{
             try {
                     const Productexist = await pManager.getProductById(pid)
@@ -146,7 +129,6 @@ socketServer.on('connection', socket =>{
             }
 
         })
-
             
         socket.on('add_Product_cart', async (productId) => {
                 try {
@@ -163,6 +145,5 @@ socketServer.on('connection', socket =>{
                      socket.emit('productAdded', "Error al agregar el producto al cart selecionado: " + error.message)  
                 }
         })
-
 })
 
